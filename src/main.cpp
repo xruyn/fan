@@ -1,4 +1,5 @@
 /* Вытяжной вентилятор на Pro Mini, DS1307, DHT22 и фоторезисторе. Вентилятор управляется твердотельным реле */
+#include <Arduino.h>
 #include <RTClib.h>
 #include <Wire.h>
 #include <DHT.h>
