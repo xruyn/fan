@@ -10,10 +10,11 @@ RTC_DS1307 rtc;       //выбор DS
 
 
 int pin_relay = 8; //пин для управление реле (выход)
-int pin_photores = 9; //пин для подключения фоторезистора (вход)
+int pin_photores = A0; //пин для подключения фоторезистора (вход)
 byte hum_summer = 60;
 byte hum_winter = 38;
 byte temp = 30;
+float analog_photores;
 // byte month_;
 // byte day;
 // byte hour;
@@ -33,7 +34,8 @@ void setup() {
 //dht.readHumidity()>65  && dht.readTemperature()>29
 void loop() {
         DateTime now = rtc.now();
-        if (digitalRead(pin_photores) == LOW) {
+        analog_photores = digitalRead(pin_photores)*0.00488;
+        if (analog_photores < 3) {
                 if (now.month()>3 && now.month()<9) {     //летний  период
                         if (dht.readHumidity()>65  && dht.readTemperature()>28) {
                                 delay(2500);
